@@ -16,9 +16,12 @@ HERE = Path(__file__).resolve().parent
 
 
 def main():
+    src = HERE / "entry.png"
+    if not src.is_file():
+        raise SystemExit("entry.png is missing from the repository")
     out_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
     out_dir.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(HERE / "entry.png", out_dir / "entry.png")
+    shutil.copyfile(src, out_dir / "entry.png")
 
 
 if __name__ == "__main__":
